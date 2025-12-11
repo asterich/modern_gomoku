@@ -3,11 +3,12 @@
 # do not edit by hand.
 
 # project
-cmake_minimum_required(VERSION 3.28.0)
+cmake_minimum_required(VERSION 3.30.0)
+set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "a9e1cf81-9932-4810-974b-6eccaf14e457")
+set(CMAKE_CXX_MODULE_STD 1)
 set(CMAKE_C_COMPILER clang)
 set(CMAKE_CXX_COMPILER clang++)
 cmake_policy(SET CMP0091 NEW)
-set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 project(gomoku LANGUAGES CXX)
 set(CURRENT_COMPILER_ID ${CMAKE_CXX_COMPILER_ID})
 
@@ -22,7 +23,11 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/gabime/spdlog.git
   GIT_TAG        v1.15.0
 )
+set(STDEXEC_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(STDEXEC_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 FetchContent_MakeAvailable(stdexec spdlog)
+set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 
 # target
 add_executable(gomoku "")
@@ -44,7 +49,12 @@ foreach(standard 26 23 20 17 14 11 98)
     else()
         check_cxx_compiler_flag("-std=c++${standard}" gomoku_support_c++_standard_${standard})
     endif()
+    if(standard IN_LIST CMAKE_CXX_COMPILER_IMPORT_STD)
+        message(STATUS "gomoku: skipping C++${standard} standard because it has not import std.")
+        continue()
+    endif()
     if(gomoku_support_c++_standard_${standard})
+        message(STATUS "gomoku: using C++${standard} standard.")
         target_compile_features(gomoku PRIVATE cxx_std_${standard})
         break()
     endif()

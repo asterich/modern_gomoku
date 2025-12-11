@@ -15,7 +15,7 @@ Clang >= 20.0, MSVC 没测过
 
 [spdlog](https://github.com/gabime/spdlog)
 
-使用 xmake 构建
+使用 xmake 构建，cmake 支持是坏的
 
 ## 编译 / 运行
 
