@@ -1,0 +1,15 @@
+toolchains/
+*.tar*
+*.zip
+*.xz
+*.7z
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+.vscode/
+build/
+.cache/
+.xmake/
+bin/
