@@ -9,7 +9,7 @@ AI 部分是 minimax + alpha-beta 剪枝，有 zobrist 缓存，能够并行搜�
 
 ## 依赖
 
-Clang >= 20.0, MSVC 没测过
+Clang >= 20.0, <del>MSVC 没测过</del>
 
 [stdexec](https://github.com/nvidia/stdexec)
 
@@ -41,7 +41,7 @@ $ ./bin/gomoku
 
 ### Windows
 
-TODO
+支持不了，MSVC 在使用 stdexec + module 时会出问题，参见：[https://developercommunity.visualstudio.com/t/c-module-:-modulewritercpp:3367:-so/10930525?space=8&q=fails+to+extract+subsecond+part&sort=newest&ftype=problem&viewtype=all](https://developercommunity.visualstudio.com/t/c-module-:-modulewritercpp:3367:-so/10930525?space=8&q=fails+to+extract+subsecond+part&sort=newest&ftype=problem&viewtype=all)
 
 ## 问题
 
